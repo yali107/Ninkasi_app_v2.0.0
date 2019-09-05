@@ -1,0 +1,16 @@
+<p>content-based-rec works!</p>
+<input type="text" (input)="onGetBeerInput($event)">
+<button (click)="onGetSimilarBeers()">get beer rec</button>
+<div *ngIf="similarBeers.length>0">
+    <ul *ngFor="let beer of similarBeers">
+        <div>{{beer}}</div>
+    </ul>
+</div>
+<button (click)="onGetBeerlist()">get beerlist</button>
+
+<button (click)="onGetBeerKeywords()">get beer kws</button>
+<div *ngIf="beerKeywords.length>0">
+    <ul *ngFor="let kw of beerKeywords">
+        <div>{{kw}}</div>
+    </ul>
+</div>
