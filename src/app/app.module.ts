@@ -4,8 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContentBasedRecComponent } from './models/content-based-rec/content-based-rec.component';
-import { CollabFilteringRecComponent } from './models/collab-filtering-rec/collab-filtering-rec.component';
+import { ContentBasedRecComponent } from './recommender-models/content-based-rec/content-based-rec.component';
+import { CollabFilteringRecComponent } from './recommender-models/collab-filtering-rec/collab-filtering-rec.component';
 
 @NgModule({
   declarations: [
