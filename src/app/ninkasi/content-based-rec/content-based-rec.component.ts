@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ModelsService } from '../../services/models.service';
+import { ModelsService } from '../../shared/services/models.service';
 
 @Component({
   selector: 'app-content-based-rec',
