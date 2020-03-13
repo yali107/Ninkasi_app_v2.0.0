@@ -7,6 +7,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MglTimelineModule } from 'angular-mgl-timeline';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -37,6 +40,10 @@ import { HomeComponent } from './pages/home/home.component';
     HttpClientModule,
     FontAwesomeModule,
     NgbModule,
+
+    BrowserAnimationsModule,
+    MglTimelineModule,
+
     NinkasiModule
 
   ],
