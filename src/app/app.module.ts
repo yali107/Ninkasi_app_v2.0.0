@@ -19,6 +19,7 @@ import { TeamComponent } from './pages/team/team.component';
 import { NinkasiModule } from './ninkasi/ninkasi.module';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 import { HomeComponent } from './pages/home/home.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { HomeComponent } from './pages/home/home.component';
     TeamComponent,
     CarouselComponent,
     HomeComponent,
+    FooterComponent,
     // NinkasiComponent,
     // ContentBasedRecComponent,
     // CollabFilteringRecComponent
