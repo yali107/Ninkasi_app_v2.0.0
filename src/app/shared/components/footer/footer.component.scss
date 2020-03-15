@@ -1,11 +1,30 @@
-.footer{
-    flex-shrink: 0;
-    flex-grow: 0;
-    background: black;
-    padding: 3px 15px;
-    color: white;
-}
+// .footer {
+//   flex-shrink: 0;
+//   flex-grow: 0;
+//   background: black;
+//   padding: 3px 15px;
+//   color: white;
+// }
 
+.footer {
+  padding: 25px 0;
+  text-align: center;
+  background: black;
+  color: white;
+}
+.footer .copyright {
+  line-height: 40px;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  text-transform: none;
+}
+.footer ul.quicklinks {
+  margin-bottom: 0;
+  line-height: 40px;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  text-transform: none;
+}
 p {
-    font-family: Lato;
+  font-family: Lato;
 }

@@ -12,10 +12,11 @@ import { NinkasiComponent } from './ninkasi/ninkasi.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'intro', component: IntroComponent },
-  { path: 'workflow', component: WorkflowComponent },
-  { path: 'team', component: TeamComponent },
+  // { path: 'intro', component: IntroComponent },
+  // { path: 'workflow', component: WorkflowComponent },
+  // { path: 'team', component: TeamComponent },
   { path: 'ninkasi', loadChildren: './ninkasi/ninkasi.module#NinkasiModule' },
+  { path: '**', redirectTo: '/home' }
 
 ];
 

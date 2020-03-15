@@ -10,6 +10,9 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MglTimelineModule } from 'angular-mgl-timeline';
 
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -45,6 +48,9 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 
     BrowserAnimationsModule,
     MglTimelineModule,
+
+    NgxPageScrollCoreModule,
+    NgxPageScrollModule,
 
     NinkasiModule
 
