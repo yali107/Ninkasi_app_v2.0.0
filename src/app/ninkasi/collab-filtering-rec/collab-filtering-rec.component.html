@@ -1,2 +1,363 @@
 <p>collab-filtering-rec works!</p>
+<button (click)="getBeerRec()">rec</button>
 
+<section id="collab-filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Find beers from other people like you!</h2>
+                <h3 class="section-subheading text-muted">Collaborative-Filtering Recommendation<br><br>
+                    Note: only top-25 beers for each state are included.</h3>
+
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h4>Enter your favorite beers and rate them: (2-10 beers, 1-20 points)</h4>
+                    </div>
+                    <div class="col-lg-12 text-center" formArrayName="userSelections">
+                        <div class="row" *ngFor="let control of userSelectionsControls; let i = index" [formGroupName]="i">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center m-2">
+                                <input type="text" formControlName="beer_name" class="form-control" placeholder="Enter a beer name">
+                            </div>
+                            <div class="col-lg-4 text-center m-2">
+                                <input type="range" formControlName="preference" class="form-control" min="1" max="20">
+                            </div>
+                            <!-- <div class="col-log-2"></div> -->
+                        </div>
+                        <br>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <button type="button" class="btn btn-primary m-3" id="displayForm" onClick="toggleform();">
+                        <!-- {% if cur_inp1 and 6 <= cur_len %}Show Less{% else %}Rate More{% endif %} -->
+                        Show More
+                    </button>
+                    <button type="submit" class="btn btn-primary m-3" [disabled]="!preferenceForm.valid">Submit</button>
+                    <br>
+                </div>
+            </form>
+        </div>
+
+            <!-- <div class="row">
+                <form method="POST" action="">
+                    <div class="col-lg-12 text-center">
+                        <h4>Enter your favorite beers and rate them: (2-10 beers, 1-20 points)</h4>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers1" name="beer_inp1" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 1 <= cur_len %} value="{{ cur_inp1[0][0] }}" {% endif %} />
+                                <datalist id="beers1">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp1" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp1').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 1 <= cur_len %} value="{{ cur_inp1[0][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp1" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <br></br>
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers2" name="beer_inp2" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 2 <= cur_len %} value="{{ cur_inp1[1][0] }}" {% endif %} />
+                                <datalist id="beers2">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp2" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp2').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 2 <= cur_len %} value="{{ cur_inp1[1][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp2" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <br></br>
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers3" name="beer_inp3" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 3 <= cur_len %} value="{{ cur_inp1[2][0] }}" {% endif %} />
+                                <datalist id="beers3">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp3" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp3').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 3 <= cur_len %} value="{{ cur_inp1[2][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp3" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <br></br>
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers4" name="beer_inp4" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 4 <= cur_len %} value="{{ cur_inp1[3][0] }}" {% endif %} />
+                                <datalist id="beers4">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp4" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp4').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 4 <= cur_len %} value="{{ cur_inp1[3][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp4" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <br></br>
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers5" name="beer_inp5" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 5 <= cur_len %} value="{{ cur_inp1[4][0] }}" {% endif %} />
+                                <datalist id="beers5">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp5" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp5').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 5 <= cur_len %} value="{{ cur_inp1[4][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp5" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                    <br></br>
+                    <div class="col-lg-12 text-center"
+                        style="display: {% if cur_inp1 and 6 <= cur_len %}block{% else %}none{% endif %}"
+                        id="toggleForm">
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers6" name="beer_inp6" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 6 <= cur_len %} value="{{ cur_inp1[5][0] }}" {% endif %} />
+                                <datalist id="beers6">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp6" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp6').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 6 <= cur_len %} value="{{ cur_inp1[5][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp6" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <br></br>
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers7" name="beer_inp7" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 7 <= cur_len %} value="{{ cur_inp1[6][0] }}" {% endif %} />
+                                <datalist id="beers7">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp7" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp7').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 7 <= cur_len %} value="{{ cur_inp1[6][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp7" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <br></br>
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers8" name="beer_inp8" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 8 <= cur_len %} value="{{ cur_inp1[7][0] }}" {% endif %} />
+                                <datalist id="beers8">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp8" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp8').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 8 <= cur_len %} value="{{ cur_inp1[7][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp8" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <br></br>
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers9" name="beer_inp9" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 9 <= cur_len %} value="{{ cur_inp1[8][0] }}" {% endif %} />
+                                <datalist id="beers9">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp9" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp9').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 9 <= cur_len %} value="{{ cur_inp1[8][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp9" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <br></br>
+                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 text-center">
+                                <input list="beers10" name="beer_inp10" type="text" placeholder="enter a beer name"
+                                    {% if cur_inp1 and 10 <= cur_len %} value="{{ cur_inp1[9][0] }}" {% endif %} />
+                                <datalist id="beers10">
+                                    {% for beer in beer_list2 %}
+                                    <option>{{ beer }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <input class="rangememeda" type="range" name="rating_inp10" min="1" max="20"
+                                    oninput="document.getElementById('rating_inp10').innerHTML = this.value;" step="1"
+                                    {% if cur_inp1 and 10 <= cur_len %} value="{{ cur_inp1[9][1] }}" {% endif %} />
+                                </input>
+                                <em id="rating_inp10" style="font-style: normal;"></em>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                    <br></br>
+                    <div class="col-lg-12 text-center">
+                        <button type="button" class="button button1" id="displayForm" onClick="toggleform();">
+                            {% if cur_inp1 and 6 <= cur_len %}Show Less{% else %}Rate More{% endif %}
+                        </button>
+                        &nbsp&nbsp&nbsp&nbsp
+                        <input type="submit" onclick="location.href='#collab-filter';" />
+                        <br></br>
+                    </div>
+                    <br></br>
+
+                </form>
+                {% if warning2 %}
+                <div class="col-lg-12 text-center">
+                    <h3 class="section-subheading text-muted">{{ warning2 }}</h3>
+                </div>
+                {% endif %}
+                <br>
+            </div> -->
+            <!-- {% if cf_rec and table_list2 %}
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <b>Top-5 favorite beers from people of a similar taste:</b>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><i>#</i></th>
+                                        <th><i>Beer Name</i></th>
+                                        <th><i>State</i></th>
+                                        <th><i>Avg User Rating (1-20)</i></th>
+                                        <th><i>Avg Overall Rating (1-20)</i></th>
+                                        <th><i>More Details</i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        {% if cf_rec %}
+                                        <td>{{cf_rec[0]}}</td>
+                                        <td>{{table_list2[0][0]}}</td>
+                                        <td>{{table_list2[0][1]}}</td>
+                                        <td>{{table_list2[0][2]}}</td>
+                                        <td><a href="{{table_list2[0][3]}}">link</a></td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        {% if cf_rec %}
+                                        <td>{{cf_rec[1]}}</td>
+                                        <td>{{table_list2[1][0]}}</td>
+                                        <td>{{table_list2[1][1]}}</td>
+                                        <td>{{table_list2[1][2]}}</td>
+                                        <td><a href="{{table_list2[1][3]}}">link</a></td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        {% if cf_rec %}
+                                        <td>{{cf_rec[2]}}</td>
+                                        <td>{{table_list2[2][0]}}</td>
+                                        <td>{{table_list2[2][1]}}</td>
+                                        <td>{{table_list2[2][2]}}</td>
+                                        <td><a href="{{table_list2[2][3]}}">link</a></td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        {% if cf_rec %}
+                                        <td>{{cf_rec[3]}}</td>
+                                        <td>{{table_list2[3][0]}}</td>
+                                        <td>{{table_list2[3][1]}}</td>
+                                        <td>{{table_list2[3][2]}}</td>
+                                        <td><a href="{{table_list2[3][3]}}">link</a></td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        {% if cf_rec %}
+                                        <td>{{cf_rec[4]}}</td>
+                                        <td>{{table_list2[4][0]}}</td>
+                                        <td>{{table_list2[4][1]}}</td>
+                                        <td>{{table_list2[4][2]}}</td>
+                                        <td><a href="{{table_list2[4][3]}}">link</a></td>
+                                        {% endif %}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %} -->
+    </div>
+</section>

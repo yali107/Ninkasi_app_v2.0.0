@@ -23,6 +23,7 @@ export class ContentBasedRecComponent implements OnInit {
   public onGetBeerlist() {
     this.modelsService.getBeerList().subscribe(
       data => {
+        console.log(data)
         this.beerlist = data;
       }
     )
@@ -50,7 +51,7 @@ export class ContentBasedRecComponent implements OnInit {
 
   public onGetBeerInput(event: Event) {
     this.beerInput = (<HTMLInputElement>event.target).value;
-    console.log(this.beerInput)
+    console.log('beer input', this.beerInput)
   }
 
 

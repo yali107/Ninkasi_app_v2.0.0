@@ -16,7 +16,7 @@ const routes: Routes = [
   // { path: 'workflow', component: WorkflowComponent },
   // { path: 'team', component: TeamComponent },
   { path: 'ninkasi', loadChildren: './ninkasi/ninkasi.module#NinkasiModule' },
-  { path: '**', redirectTo: '/home' }
+  // { path: '**', redirectTo: '/home' }
 
 ];
 

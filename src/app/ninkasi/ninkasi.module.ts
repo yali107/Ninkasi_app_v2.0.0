@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { NinkasiComponent } from './ninkasi.component';
@@ -18,6 +19,7 @@ import { NinkasiHeaderComponent } from './ninkasi-header/ninkasi-header.componen
     ],
     imports: [
         RouterModule,
+        ReactiveFormsModule,
         NinkasiRoutingModule,
         CommonModule
     ]

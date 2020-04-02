@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { UserSelection, UserChoice } from 'src/app/ninkasi/collab-filtering-rec/collab-filtering-rec.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,6 +12,7 @@ export class ModelsService {
   beerlistUri: string = this.apiPath + 'api/beerlist';
   cbBeerRecUri: string = this.apiPath + 'api/cbbeerrec';
   cbBeerKeywordsUri: string = this.apiPath + 'api/cbbeerkws';
+  cfBeerRecUri: string = this.apiPath + 'api/cfbeerrec';
 
   constructor(
     private http: HttpClient
@@ -31,6 +34,13 @@ export class ModelsService {
     const payload = { 'beer_selected': inputBeer};
     console.log(inputBeer)
     console.log(payload)
-    return this.http.post(this.cbBeerKeywordsUri, payload)
+    return this.http.post(this.cbBeerKeywordsUri, payload);
+  }
+
+  getCollabFilterBeers(inputBeerPrefs) {
+    const payload = {
+      'user_selection': inputBeerPrefs['userSelections']
+    };
+    return this.http.post(this.cfBeerRecUri, payload);
   }
 }
