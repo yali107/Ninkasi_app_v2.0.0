@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AgGridModule } from 'ag-grid-angular';
 
 import { NinkasiComponent } from './ninkasi.component';
 import { ContentBasedRecComponent } from './content-based-rec/content-based-rec.component';
@@ -19,9 +20,10 @@ import { NinkasiHeaderComponent } from './ninkasi-header/ninkasi-header.componen
     ],
     imports: [
         RouterModule,
+        CommonModule,
+        AgGridModule.withComponents([]),
         ReactiveFormsModule,
         NinkasiRoutingModule,
-        CommonModule
     ]
 })
 export class NinkasiModule {}
