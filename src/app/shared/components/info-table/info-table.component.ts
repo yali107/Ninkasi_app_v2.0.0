@@ -42,13 +42,12 @@ export class InfoTableComponent implements OnInit {
     // debugger;
   }
 
-  updateData() {
-    this.updateRowData
-  }
+  // updateData() {
+  //   this.updateRowData
+  // }
 
   onGridReady(params) {
     this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
     params.api.setRowData(this.beerData);
     this.gridApi.sizeColumnsToFit()
   }
