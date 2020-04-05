@@ -1,3 +1,9 @@
-<ag-grid-angular style="width: 900px; height: 500px;" class="ag-theme-material" [rowData]="beerData"
-    [columnDefs]="columnDefs" (gridReady)="onGridReady($event)">
+<ag-grid-angular 
+    style="width: fluid;" 
+    class="ag-theme-material" 
+    [rowData]="beerData"
+    [columnDefs]="columnDefs" 
+    [domLayout]="domLayout"
+    (gridReady)="onGridReady($event)"
+>
 </ag-grid-angular>

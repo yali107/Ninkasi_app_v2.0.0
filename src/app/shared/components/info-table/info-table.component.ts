@@ -14,6 +14,7 @@ export class InfoTableComponent implements OnInit {
   private gridColumnApi;
   private sortingOrder;
   private columnDefs;
+  private domLayout = 'autoHeight';
   // beerData = [
   //   { beerName: "one", state: "nn", avgOverallRating: 12, avgUserRating: 34, detailLink: "hihi" },
   //   { beerName: "two", state: "ds", avgOverallRating: 13, avgUserRating: 34, detailLink: "dsds" }
@@ -23,11 +24,17 @@ export class InfoTableComponent implements OnInit {
   constructor() {
     this.columnDefs = [
       // { headerName: "#", field: "no", width: 100 },
-      { headerName: "Beer Name", field: "beer_name", width: 300 },
-      { headerName: "State", field: "state", width: 200 },
-      { headerName: "Avg User Rating (1-20)", field: "avg_user_rating", width: 100 },
-      { headerName: "Avg Overall Rating (1-20)", field: "avg_overall_rating", width: 100 },
-      { headerName: "More Details", field: "detail_link", width: 100 }
+      { headerName: "Beer Name", field: "beer_name" },
+      { headerName: "State", field: "state" },
+      { headerName: "Avg User Rating (1-20)", field: "avg_user_rating" },
+      { headerName: "Avg Overall Rating (1-20)", field: "avg_overall_rating" },
+      { 
+        headerName: "More Details", 
+        field: "detail_link",
+        cellRenderer: (params) => {
+          return '<a href="' + params.value + '">Link</a>';
+        } 
+      }
     ];
   }
 
@@ -43,6 +50,7 @@ export class InfoTableComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     params.api.setRowData(this.beerData);
+    this.gridApi.sizeColumnsToFit()
   }
 
 }

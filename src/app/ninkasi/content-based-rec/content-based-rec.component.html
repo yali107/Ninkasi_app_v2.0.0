@@ -1,4 +1,4 @@
-<input type="text" (input)="onGetBeerInput($event)">
+<!-- <input type="text" (input)="onGetBeerInput($event)">
 <button (click)="onGetSimilarBeers()">get beer rec</button>
 <div *ngIf="similarBeers.length>0">
     <ul *ngFor="let beer of similarBeers">
@@ -12,7 +12,7 @@
     <ul *ngFor="let kw of beerKeywords">
         <div>{{kw}}</div>
     </ul>
-</div>
+</div> -->
 
 <section id="content-based" class="bg-light-gray">
     <div class="container">
@@ -21,49 +21,52 @@
                 <h2 class="section-heading">Find beers that are similar to your favoriate!</h2>
                 <h3 class="section-subheading text-muted">Content-based Recommendation<br><br>
                     Note: only top-25 beers for each state are included.</h3>
-
             </div>
-
-            <div class="col-lg-12 text-center">
-                <div class="col-lg-12 text-center">
-                    <form>
-                        <div class="col-lg-12 text-center">
-                            <h4> Enter your favorite beer:</h4>
-                        </div>
+            <div class="col-lg-12">
+                <form [formGroup]="beerForm" (ngSubmit)="onSubmit()">
+                    <div class="col-lg-12 text-center">
+                        <h4> Enter your favorite beer:</h4>
+                    </div>
+                    <br>
+                    <div class="row text-center">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            <input list="beers" name="beer_inp0" type="text" placeholder="enter a beer name"/>
+                            <input class="form-control" formControlName="beer_selected" type="text"
+                                placeholder="enter a beer name" />
 
                         </div>
                         <div class="col-md-3"></div>
-                        <div class="col-md-12">
-                            <input type="submit" onclick="location.href='#content-based';" />
-                            <br>
+                    </div>
+                    <br>
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <br>
+                    <div class="col-lg-12" *ngIf="areKeywordsReady">
+                        <div class="card">
+                            <div class="card-header">
+                                <b>Keywords of this beer:</b>
+                            </div>
+                            <div class="card-body">
+                                <p>{{ beerKeywords }}</p>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <br>
+                    <div class="col-lg-12" *ngIf="areBeerRecsReady">
+                        <div class="card">
+                            <div class="card-header">
+                                <b>10 Beers Similar to Your Favoriate:</b>
+                            </div>
+                            <div class="card-body">
+                                <app-info-table [beerData]="beerRecs"></app-info-table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
 
 
-            <div class="col-lg-12">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <b>Key words of this beer:</b>
-                    </div>
-                    <div class="panel-body">
-                        <p>{{ key_words }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <b>10 Beers Similar to Your Favoriate:</b>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
 </section>

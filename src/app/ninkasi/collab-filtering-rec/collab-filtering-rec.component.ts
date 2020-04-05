@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
-
-
 import { UserChoice } from './collab-filtering-rec.model';
 import { ModelsService } from 'src/app/shared/services/models.service';
-import { debug } from 'util';
 
 
 @Component({
@@ -23,8 +20,7 @@ export class CollabFilteringRecComponent implements OnInit {
   beerRecs;
   tableReady: boolean = false;
 
-  private gridApi;
-  columnDefs;
+  // columnDefs;
   
 
   constructor(
@@ -71,23 +67,16 @@ export class CollabFilteringRecComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.preferenceForm.value);
     this.getBeerRec(this.preferenceForm.value);
   }
 
   public getBeerRec(userPrefs) {
-    console.log('cf rec')
     return this.modelService.getCollabFilterBeers(userPrefs).subscribe(
       data => {
-        console.log(data);
         this.beerRecs = data['rec_beers'];
         // debugger;
         this.tableReady = true;
       }
     )
-  }
-
-  updateTable() {
-    this.gridApi.refreshCells();
   }
 }
