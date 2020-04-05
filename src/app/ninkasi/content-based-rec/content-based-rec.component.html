@@ -1,4 +1,3 @@
-<p>content-based-rec works!</p>
 <input type="text" (input)="onGetBeerInput($event)">
 <button (click)="onGetSimilarBeers()">get beer rec</button>
 <div *ngIf="similarBeers.length>0">
@@ -14,3 +13,57 @@
         <div>{{kw}}</div>
     </ul>
 </div>
+
+<section id="content-based" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Find beers that are similar to your favoriate!</h2>
+                <h3 class="section-subheading text-muted">Content-based Recommendation<br><br>
+                    Note: only top-25 beers for each state are included.</h3>
+
+            </div>
+
+            <div class="col-lg-12 text-center">
+                <div class="col-lg-12 text-center">
+                    <form>
+                        <div class="col-lg-12 text-center">
+                            <h4> Enter your favorite beer:</h4>
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <input list="beers" name="beer_inp0" type="text" placeholder="enter a beer name"/>
+
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-12">
+                            <input type="submit" onclick="location.href='#content-based';" />
+                            <br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="col-lg-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <b>Key words of this beer:</b>
+                    </div>
+                    <div class="panel-body">
+                        <p>{{ key_words }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <b>10 Beers Similar to Your Favoriate:</b>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -12,6 +12,7 @@ import { MglTimelineModule } from 'angular-mgl-timeline';
 
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { NinkasiModule } from './ninkasi/ninkasi.module';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { InfoTableComponent } from './shared/components/info-table/info-table.component';
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     CarouselComponent,
     HomeComponent,
     FooterComponent,
+    // InfoTableComponent,
     // NinkasiComponent,
     // ContentBasedRecComponent,
     // CollabFilteringRecComponent
@@ -51,6 +54,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 
     NgxPageScrollCoreModule,
     NgxPageScrollModule,
+    // AgGridModule.withComponents([]),
 
     NinkasiModule
 

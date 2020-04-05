@@ -7,6 +7,13 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+@import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+@import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+
+.ag-theme-alpine {
+    @include ag-theme-alpine();
+}
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
@@ -154,3 +161,5 @@ ul.social-buttons li a:active {
 .team-member p {
   margin-top: 0;
 }
+
+
