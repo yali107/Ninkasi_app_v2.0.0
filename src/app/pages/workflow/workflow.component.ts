@@ -41,6 +41,7 @@ export class WorkflowComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.entries)
   }
 
   onHeaderClick(event) {

@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'intro', component: HomeComponent },
   { path: 'workflow', component: HomeComponent },
   // { path: 'team', component: TeamComponent },
-  { path: 'ninkasi', loadChildren: './ninkasi/ninkasi.module#NinkasiModule' },
+  { path: 'ninkasi', loadChildren: () => import('./ninkasi/ninkasi.module').then(m => m.NinkasiModule) },
   // { path: '**', redirectTo: '/home' }
 
 ];

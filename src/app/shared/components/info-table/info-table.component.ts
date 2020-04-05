@@ -13,8 +13,8 @@ export class InfoTableComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
   private sortingOrder;
-  private columnDefs;
-  private domLayout = 'autoHeight';
+  public columnDefs;
+  public domLayout = 'autoHeight';
   // beerData = [
   //   { beerName: "one", state: "nn", avgOverallRating: 12, avgUserRating: 34, detailLink: "hihi" },
   //   { beerName: "two", state: "ds", avgOverallRating: 13, avgUserRating: 34, detailLink: "dsds" }
