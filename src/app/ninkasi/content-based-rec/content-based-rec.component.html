@@ -31,8 +31,13 @@
                     <div class="row text-center">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            <input class="form-control" formControlName="beer_selected" type="text"
-                                placeholder="enter a beer name" />
+                            <input type="text" class="form-control" placeholder="enter a beer name" formControlName="beer_selected"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
 
                         </div>
                         <div class="col-md-3"></div>

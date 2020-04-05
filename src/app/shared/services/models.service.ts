@@ -19,21 +19,16 @@ export class ModelsService {
   ) { }
 
   getBeerList() {
-    console.log('beerlist uri', this.beerlistUri);
     return this.http.get(this.beerlistUri);
   }
 
   getContentBasedBeers(inputBeer: string) {
     const payload = { 'beer_selected': inputBeer};
-    console.log(inputBeer)
-    console.log(payload)
     return this.http.post(this.cbBeerRecUri, payload);
   }
 
   getBeerKeywords(inputBeer: string) {
     const payload = { 'beer_selected': inputBeer};
-    console.log(inputBeer)
-    console.log(payload)
     return this.http.post(this.cbBeerKeywordsUri, payload);
   }
 
