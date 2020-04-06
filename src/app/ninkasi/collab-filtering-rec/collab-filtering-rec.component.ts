@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl, FormArray, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+
+import { Observable, merge, Subscription } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 import { UserChoice } from './collab-filtering-rec.model';
 import { ModelsService } from 'src/app/shared/services/models.service';
@@ -10,56 +13,95 @@ import { ModelsService } from 'src/app/shared/services/models.service';
   templateUrl: './collab-filtering-rec.component.html',
   styleUrls: ['./collab-filtering-rec.component.scss']
 })
-export class CollabFilteringRecComponent implements OnInit {
-  mockInput: UserChoice[] = [
-    { beer_name: 'Yazoo Embrace the Funk Series: Deux Rouges', preference: 20 },
-    { beer_name: 'Iron Hill Bourbon Porter', preference: 3 },
-  ]
-
+export class CollabFilteringRecComponent implements OnInit, OnDestroy {
   preferenceForm: FormGroup;
   beerRecs;
   tableReady: boolean = false;
 
-  // columnDefs;
-  
+  userSelections: FormArray;
+  initPrefSub: Subscription;
+
+  beerList;
+  filteredOptions: Observable<string[]>;
 
   constructor(
-    private modelService: ModelsService
-  ) { 
-    // this.columnDefs = [
-    //   // { headerName: "#", field: "no", width: 100 },
-    //   { headerName: "Beer Name", field: "beer_name", width: 300 },
-    //   { headerName: "State", field: "state", width: 200 },
-    //   { headerName: "Avg User Rating (1-20)", field: "avg_user_rating", width: 100 },
-    //   { headerName: "Avg Overall Rating (1-20)", field: "avg_overall_rating", width: 100 },
-    //   { headerName: "More Details", field: "detail_link", width: 100 }
-    // ];
-  }
+    private modelsService: ModelsService
+  ) { }
+
+  //todo: fix autocomplete view bug where only 1 showing after previous selection, speed up autocomplete, add validator for valid prefs 2+.
 
   ngOnInit() {
     this.initForm();
+
+    this.initPrefSub = this.modelsService.getBeerList().subscribe(
+      data => {
+        this.beerList = data;
+        this.filteredOptions = merge(...(this.preferenceForm.get('userSelections') as FormArray).controls.map(control =>
+          control.get('beer_name').valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          )
+        ));
+      }
+    )
+  }
+
+  private _filter(value): string[] {
+    console.log('value', value)
+    const filterValue = value.toLowerCase();
+
+    return this.beerList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   private initForm() {
-    let userSelections: FormArray = new FormArray([]);
+    this.userSelections = new FormArray([], this.minPrefsValidator(2));
 
-    userSelections.push(
-      new FormGroup({
-        'beer_name': new FormControl(null, Validators.required),
-        'preference': new FormControl(10)
-      })
-    )
-
-    userSelections.push(
-      new FormGroup({
-        'beer_name': new FormControl(null, Validators.required),
-        'preference': new FormControl(10)
-      })
-    )
+    for (let i = 0; i < 2; i++) {
+      this.addPrefsToArray();
+    }
 
     this.preferenceForm = new FormGroup({
-      'userSelections': userSelections
+      'userSelections': this.userSelections
     })
+  }
+
+  public onShowMore() {
+    if (this.userSelections.length < 10) {
+      for (let i = 0; i < 8; i++) {
+        this.addPrefsToArray();
+      }
+      this.filteredOptions = merge(...(this.preferenceForm.get('userSelections') as FormArray).controls.map(control =>
+        control.get('beer_name').valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        )
+      ));
+    }
+  }
+
+  public minPrefsValidator(min: number): ValidatorFn {
+    return (c: FormArray): {[key: string]: any} => {
+      if ((c.controls.filter(control => control.status == 'VALID')).length >= min) {
+        return null;
+      }
+      return { 'minPrefsValidator': {valid: false} };
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.userSelections.length > 2) {
+      this.initPrefSub.unsubscribe();
+    }
+  }
+
+  public addPrefsToArray() {
+    this.userSelections.push(
+      new FormGroup({
+        'index': new FormControl(this.userSelections.length),
+        'beer_name': new FormControl(null),
+        'preference': new FormControl(10)
+      })
+    );
   }
 
   get userSelectionsControls() {
@@ -71,7 +113,7 @@ export class CollabFilteringRecComponent implements OnInit {
   }
 
   public getBeerRec(userPrefs) {
-    return this.modelService.getCollabFilterBeers(userPrefs).subscribe(
+    return this.modelsService.getCollabFilterBeers(userPrefs).subscribe(
       data => {
         this.beerRecs = data['rec_beers'];
         // debugger;

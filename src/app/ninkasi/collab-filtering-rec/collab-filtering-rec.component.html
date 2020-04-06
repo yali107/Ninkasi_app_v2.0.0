@@ -19,8 +19,15 @@
                             [formGroupName]="i">
                             <div class="col-lg-2"></div>
                             <div class="col-lg-4 text-center m-2">
-                                <input type="text" formControlName="beer_name" class="form-control"
-                                    placeholder="Enter a beer name">
+                                <!-- <input type="text" formControlName="beer_name" class="form-control"
+                                    placeholder="Enter a beer name"> -->
+                                <input type="text" class="form-control" placeholder="Enter a beer name"
+                                    formControlName="beer_name" [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                        {{option}}
+                                    </mat-option>
+                                </mat-autocomplete>
                             </div>
                             <div class="col-lg-4 text-center m-2">
                                 <input type="range" formControlName="preference" class="form-control" min="1" max="20">
@@ -32,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 text-center">
-                    <button type="button" class="btn btn-primary m-3" id="displayForm" onClick="toggleform();">
+                    <button type="button" class="btn btn-primary m-3" id="displayForm" (click)="onShowMore();">
                         <!-- {% if cur_inp1 and 6 <= cur_len %}Show Less{% else %}Rate More{% endif %} -->
                         Show More
                     </button>
@@ -48,11 +55,11 @@
                             <app-info-table [beerData]="beerRecs"></app-info-table>
                         </div>
                     </div>
-                    
+
                     <!-- <ag-grid-angular style="width: 900px; height: 500px;" class="ag-theme-material" [rowData]="beerRecs"
                         [columnDefs]="columnDefs">
                     </ag-grid-angular> -->
-        
+
                 </div>
             </form>
         </div>

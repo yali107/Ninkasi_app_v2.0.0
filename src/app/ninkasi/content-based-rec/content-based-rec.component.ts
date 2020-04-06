@@ -19,10 +19,6 @@ export class ContentBasedRecComponent implements OnInit {
   beerList;
   filteredOptions: Observable<string[]>;
 
-  // beerList = [
-  //   "Abita Select Imperator", "Abita Shotgun Double IPA", "Abita Wrought Iron IPA", "Against the Grain / De Molen Bo & Luke", "Against the Grain / Dry & Bitter Your Lytest One", "Against the Grain / To l An Ale Pleasure", "Against the Grain 35K Stout", "Against the Grain 70K", "Against the Grain Brett The Hipman Hop", "Against the Grain Citra Ass Down", "Against the Grain Gnight Ryder", "Against the Grain London Balling", "Against the Grain Rico Sauvin", "Against the Grain The Green Dragon", "Against the Grain Tropical Segway Kitten", "Alaskan Pilot Series: Barley Wine Ale", "Alaskan Smoked Porter", "Alba Vineyard Forbidden", "Alchemist Heady Topper", "AleSmith Speedway Stout",
-  // ]
-
   beerKeywords: string;
   areKeywordsReady: boolean = false;
   areBeerRecsReady: boolean = false;
@@ -73,15 +69,6 @@ export class ContentBasedRecComponent implements OnInit {
     this.onGetBeerKeywords(this.beerForm.value.beer_selected);
     this.onGetSimilarBeers(this.beerForm.value.beer_selected);
   }
-
-  // public getBeerlist() {
-  //   this.modelsService.getBeerList().subscribe(
-  //     data => {
-  //       console.log(data)
-  //       this.beerList = data;
-  //     }
-  //   )
-  // }
 
   public onGetSimilarBeers(beerSelected) {
     this.modelsService.getContentBasedBeers(beerSelected)
