@@ -62,7 +62,7 @@ export class ContentBasedRecComponent implements OnInit {
 
     this.beerForm = new FormGroup({
       'beer_selected': new FormControl(beerInput, Validators.required)
-    });
+    }, Validators.required);
   }
 
   public onSubmit() {
