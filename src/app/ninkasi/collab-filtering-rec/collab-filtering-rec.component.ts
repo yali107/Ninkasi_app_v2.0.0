@@ -33,7 +33,7 @@ export class CollabFilteringRecComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initForm();
-    debugger;
+    // debugger;
     this.initPrefSub = this.modelsService.getBeerList().subscribe(
       data => {
         this.beerList = data;
@@ -111,6 +111,7 @@ export class CollabFilteringRecComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isModelLoading = true;
+    this.tableReady = false;
     this.getBeerRec(this.preferenceForm.value);
   }
 

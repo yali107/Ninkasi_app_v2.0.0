@@ -33,7 +33,7 @@ export class InfoTableComponent implements OnInit {
     ];
     this.rowClassRules = {
       'even': (params) => {
-        debugger;
+        // debugger;
         return +params.node.id % 2 === 1;
       }
     }

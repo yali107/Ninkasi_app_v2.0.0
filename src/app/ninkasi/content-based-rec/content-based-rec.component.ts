@@ -22,6 +22,7 @@ export class ContentBasedRecComponent implements OnInit {
   beerKeywords: string;
   areKeywordsReady: boolean = false;
   areBeerRecsReady: boolean = false;
+  isModelLoading: boolean = false;
 
   constructor(
     private modelsService: ModelsService
@@ -46,7 +47,7 @@ export class ContentBasedRecComponent implements OnInit {
     //   startWith(''),
     //   map(value => this._filter(value))
     // )
-      // debugger;
+    // debugger;
   }
 
   private _filter(value): string[] {
@@ -66,8 +67,12 @@ export class ContentBasedRecComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.isModelLoading = true;
+    this.areBeerRecsReady = false;
+    this.areKeywordsReady = false;
     this.onGetBeerKeywords(this.beerForm.value.beer_selected);
     this.onGetSimilarBeers(this.beerForm.value.beer_selected);
+
   }
 
   public onGetSimilarBeers(beerSelected) {
@@ -77,6 +82,7 @@ export class ContentBasedRecComponent implements OnInit {
           this.beerRecs = data['rec_beers'];
           console.log(this.beerRecs);
           this.areBeerRecsReady = true;
+          this.isModelLoading = false;
         }
       )
   }

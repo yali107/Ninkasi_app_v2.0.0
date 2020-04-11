@@ -12,6 +12,7 @@ import { CollabFilteringRecComponent } from './collab-filtering-rec/collab-filte
 import { NinkasiRoutingModule } from './ninkasi-routing.module';
 import { NinkasiHeaderComponent } from './ninkasi-header/ninkasi-header.component';
 import { InfoTableComponent } from '../shared/components/info-table/info-table.component';
+import { ModelLoaderComponent } from '../shared/components/model-loader/model-loader.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { InfoTableComponent } from '../shared/components/info-table/info-table.c
         ContentBasedRecComponent,
         CollabFilteringRecComponent,
         NinkasiHeaderComponent,
-        InfoTableComponent
+        InfoTableComponent,
+        ModelLoaderComponent
     ],
     imports: [
         RouterModule,

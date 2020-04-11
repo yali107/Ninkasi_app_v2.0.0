@@ -31,8 +31,8 @@
                     <div class="row text-center">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="enter a beer name" formControlName="beer_selected"
-                                [matAutocomplete]="auto">
+                            <input type="text" class="form-control" placeholder="enter a beer name"
+                                formControlName="beer_selected" [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete">
                                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                     {{option}}
@@ -46,26 +46,31 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <br>
-                    <div class="col-lg-12" *ngIf="areKeywordsReady">
-                        <div class="card">
-                            <div class="card-header">
-                                <b>Keywords of this beer:</b>
+                    <div *ngIf="areKeywordsReady && areBeerRecsReady">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <b>Keywords of this beer:</b>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{ beerKeywords }}</p>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <p>{{ beerKeywords }}</p>
+                        </div>
+                        <br>
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <b>10 Beers Similar to Your Favoriate:</b>
+                                </div>
+                                <div class="card-body">
+                                    <app-info-table [beerData]="beerRecs"></app-info-table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="col-lg-12" *ngIf="areBeerRecsReady">
-                        <div class="card">
-                            <div class="card-header">
-                                <b>10 Beers Similar to Your Favoriate:</b>
-                            </div>
-                            <div class="card-body">
-                                <app-info-table [beerData]="beerRecs"></app-info-table>
-                            </div>
-                        </div>
+                    <div class="col-lg-12 text-center beer-loader-container" *ngIf="isModelLoading">
+                        <app-model-loader></app-model-loader>
                     </div>
                 </form>
             </div>
